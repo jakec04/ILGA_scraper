@@ -183,7 +183,7 @@ To make the scraper reusable across sessions and bill types, use the following t
 ```
 
 Download the script:  
-[witness_slip_scraper_template.py](witness_slip_scraper_template.py)
+[witness_slip_scraper_template.py](https://github.com/jakec04/ILGA_scraper/blob/540a22d491a4fee27ca49421efa96e503de22c40/GA_Scraper_template.py)
 
 ---
 
