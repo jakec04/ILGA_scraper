@@ -92,12 +92,7 @@ len([f for f in os.listdir(json_dir) if f.startswith('HB')])
 ```
 - Merging based on `bill_number` or extracted `doc_num`
 
-### 7. Adapted for 102nd GA (HB1–7030)
-- Updated identifiers:
-```python
-GA = "102", GAID = "16", SessionID = "110"
 ```
-- Created full and test scrapers (15-bill sample)
 
 ---
 
@@ -111,7 +106,7 @@ pip install requests beautifulsoup4 pandas
 
 ## Directory Requirements
 
-- Folder of LegiScan JSONs (e.g., `102_bill/`)
+- Folder of LegiScan JSONs (e.g., `path/to/JSON/folder`)
 - Output CSVs: `103rd_HB_SLIPS.csv`, `102nd_HB_SLIPS.csv`, etc.
 
 ---
@@ -171,7 +166,6 @@ with open("slip_summary.txt", "w") as f:
 
 This analysis helps reveal how many bills received large volumes of public input, and can identify the most contentious or widely supported legislation in each session.
 
-
 ---
 
 ## Scraper Template and Example Usage
@@ -215,3 +209,13 @@ To obtain JSON bill exports from LegiScan for enrichment or bill list reference,
 ---
 
 This guide, script template, and example outputs are meant to streamline both the data scraping and analysis phases of tracking public legislative input in Illinois.
+---
+
+## Attribution
+
+Created and maintained by [Jake Cox](https://github.com/jakec04)  
+
+*Legislative Datasets by LegiScan LLC is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)*
+
+Built with guidance and troubleshooting support from OpenAI’s ChatGPT
+
