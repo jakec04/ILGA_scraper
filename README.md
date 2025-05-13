@@ -1,6 +1,6 @@
 # Illinois General Assembly Witness Slip Scraper
 
-## Project Goal  
+## About
 Scrape accurate witness slip data (proponents, opponents, no position) for all Illinois House Bills across multiple General Assembly (GA) sessions and optionally enrich that data using LegiScan bill metadata.
 
 ---
