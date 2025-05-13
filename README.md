@@ -111,3 +111,50 @@ pip install requests beautifulsoup4 pandas
 - Write error logs
 - Save to SQLite, JSONL, or upload to GitHub
 
+
+
+---
+
+## Data Analysis Guide
+
+Once you have your `*.csv` output file, you can run statistical summaries to understand witness slip patterns across bills.
+
+### Example: Summarize `total_slips` Column
+
+Create a script named `summarize_slip_statistics.py` with the following:
+
+```python
+import pandas as pd
+
+# Load your CSV
+df = pd.read_csv("103rd_HB_SLIPS.csv")  # or your file path
+
+# Descriptive stats
+print("Descriptive Statistics for total_slips:")
+print(df["total_slips"].describe())
+
+# Additional insights
+print("\nBills with 0 slips:", (df["total_slips"] == 0).sum())
+print("Bills with > 100 slips:", (df["total_slips"] > 100).sum())
+print("Bills with > 500 slips:", (df["total_slips"] > 500).sum())
+print("Bills with > 1000 slips:", (df["total_slips"] > 1000).sum())
+
+# Top 10 bills by slip volume
+print("\nTop 10 bills by total_slips:")
+print(df.sort_values("total_slips", ascending=False)[["bill_number", "total_slips"]].head(10))
+```
+
+### Optionally Save Results to a File
+
+```python
+with open("slip_summary.txt", "w") as f:
+    f.write(df["total_slips"].describe().to_string())
+    f.write(f"\n\nBills with 0 slips: {(df['total_slips'] == 0).sum()}")
+    f.write(f"\nBills with > 100 slips: {(df['total_slips'] > 100).sum()}")
+    f.write(f"\nBills with > 500 slips: {(df['total_slips'] > 500).sum()}")
+    f.write(f"\nBills with > 1000 slips: {(df['total_slips'] > 1000).sum()}")
+```
+
+---
+
+This analysis helps reveal how many bills received large volumes of public input, and can identify the most contentious or widely supported legislation in each session.
