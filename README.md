@@ -18,6 +18,18 @@ Each GA session uses:
 - `GAID` (internal session ID)
 - `SessionID`
 
+Each ILGA bill page is constructed using a combination of:
+- `GA` (General Assembly number)
+- `GAID` (internal session identifier)
+- `SessionID` (session instance)
+- `DocNum` (bill number)
+
+These parameters are visible in the URL and must match the session metadata for a bill. 
+
+Here’s a visual reference showing how these parameters appear:
+
+![ILGA URL Structure](https://github.com/jakec04/ILGA_scraper/blob/50bc6ed14b5d775d53bfe46085fc51c9f2115a22/URL_structure.png)
+
 ### 3. HTML Structure
 Witness slip counts are found inside:
 ```html
