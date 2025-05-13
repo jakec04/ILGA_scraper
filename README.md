@@ -37,14 +37,14 @@ bill_number, title, doc_num, proponents, opponents, no_position, total_slips, wi
 
 ---
 
-## Iterative Process Summary
+## The process of making the scraper
 
 ### 1. Base Scraper for 103rd GA (HB1–4000)
 - Built Python script using `requests` + `BeautifulSoup`
 - Initially parsed full witness slip tables (inaccurate)
 
 ### 2. Switched to Summary Counts
-- Validated HTML shows totals inside `.tabcontrol` cells
+- Validated ILGA back-end HTML shows totals inside `.tabcontrol` cells
 - New parsing logic:
 ```python
 td_elements = soup.find_all("td", class_="tabcontrol")
@@ -52,7 +52,7 @@ proponents = extract(td_elements[0].text)
 ```
 
 ### 3. Tested with Small Sample
-- Limited scrape to HB1–25 to verify data
+- Limited scrape to HB1–25 to verify scraper function
 
 ### 4. Fixed “0 Remaining Bills” Bug
 - Caused by using an incomplete CSV for doc_num comparisons
@@ -85,13 +85,13 @@ len([f for f in os.listdir(json_dir) if f.startswith('HB')])
 ```python
 GA = "102", GAID = "16", SessionID = "110"
 ```
-- Created full and test scrapers (15-bill sample)
+- Created full and test scrapers (smaller quantity to ensure scraper was working correctly) 
 
 ---
 
 ## Dependencies
 
-```bash
+```python
 pip install requests beautifulsoup4 pandas
 ```
 
@@ -100,18 +100,7 @@ pip install requests beautifulsoup4 pandas
 ## Directory Requirements
 
 - Folder of LegiScan JSONs (e.g., `102_bill/`)
-- Output CSVs: `103rd_HB_SLIPS.csv`, `102nd_HB_SLIPS.csv`, etc.
-
----
-
-## Optional Features (For Future Development)
-
-- Auto-resume or fail-safe logic
-- Merge with JSON metadata inline
-- Write error logs
-- Save to SQLite, JSONL, or upload to GitHub
-
-
+- Output CSVs: `103rd_HB_SLIPS.csv`, `102nd_HB_SLIPS.csv`, etc
 
 ---
 
@@ -142,17 +131,6 @@ print("Bills with > 1000 slips:", (df["total_slips"] > 1000).sum())
 # Top 10 bills by slip volume
 print("\nTop 10 bills by total_slips:")
 print(df.sort_values("total_slips", ascending=False)[["bill_number", "total_slips"]].head(10))
-```
-
-### Optionally Save Results to a File
-
-```python
-with open("slip_summary.txt", "w") as f:
-    f.write(df["total_slips"].describe().to_string())
-    f.write(f"\n\nBills with 0 slips: {(df['total_slips'] == 0).sum()}")
-    f.write(f"\nBills with > 100 slips: {(df['total_slips'] > 100).sum()}")
-    f.write(f"\nBills with > 500 slips: {(df['total_slips'] > 500).sum()}")
-    f.write(f"\nBills with > 1000 slips: {(df['total_slips'] > 1000).sum()}")
 ```
 
 ---
